@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GlowEdit - Photo Editor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div>
+        <h1>✨ GlowEdit</h1>
+        <p>Make every photo look beautiful</p>
+    </div>
+
+    <button id="resetBtn" class="small-btn">
+        Reset
+    </button>
+</header>
+
+
+<main class="container">
+
+    <!-- UPLOAD -->
+
+    <section id="uploadSection" class="upload-card">
+
+        <div class="upload-icon">
+            📸
+        </div>
+
+        <h2>Beautiful photos in one tap</h2>
+
+        <p>
+            Upload a photo and GlowEdit will analyze
+            its lighting and automatically improve it.
+        </p>
+
+        <label for="photoInput" class="upload-btn">
+            Choose Photo
+        </label>
+
+        <input
+            type="file"
+            id="photoInput"
+            accept="image/*"
+            hidden
+        >
+
+        <p class="privacy">
+            🔒 Your photo is processed on your device.
+        </p>
+
+    </section>
+
+
+    <!-- EDITOR -->
+
+    <section id="editorSection" class="editor hidden">
+
+        <!-- IMAGE -->
+
+        <div class="image-area">
+
+            <div class="image-wrapper">
+
+                <img
+                    id="originalImage"
+                    class="photo"
+                    alt="Original photo"
+                >
+
+                <canvas id="photoCanvas"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ANALYSIS -->
+
+        <div class="analysis-card">
+
+            <div class="analysis-title">
+                <span>✨ Photo Analysis</span>
+
+                <span id="conditionBadge">
+                    Ready
+                </span>
+            </div>
+
+            <div class="analysis-grid">
+
+                <div>
+                    <small>Brightness</small>
+                    <strong id="brightnessValue">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Contrast</small>
+                    <strong id="contrastValue">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Color</small>
+                    <strong id="colorValue">
+                        -
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Lighting</small>
+                    <strong id="lightingValue">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AUTO ENHANCE -->
+
+        <button
+            id="autoBtn"
+            class="auto-btn"
+        >
+            ✨ Auto Enhance
+        </button>
+
+
+        <!-- PRESETS -->
+
+        <section class="panel">
+
+            <h3>Presets</h3>
+
+            <div class="presets">
+
+                <button
+                    class="preset"
+                    data-preset="natural"
+                >
+                    🍎
+                    <span>iPhone Natural</span>
+                </button>
+
+                <button
+                    class="preset"
+                    data-preset="studio"
+                >
+                    💡
+                    <span>Studio Light</span>
+                </button>
+
+                <button
+                    class="preset"
+                    data-preset="portrait"
+                >
+                    👤
+                    <span>Portrait</span>
+                </button>
+
+                <button
+                    class="preset"
+                    data-preset="warm"
+                >
+                    🌅
+                    <span>Warm</span>
+                </button>
+
+                <button
+                    class="preset"
+                    data-preset="cool"
+                >
+                    ❄️
+                    <span>Cool</span>
+                </button>
+
+                <button
+                    class="preset"
+                    data-preset="cinematic"
+                >
+                    🎬
+                    <span>Cinematic</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTROLS -->
+
+        <section class="panel">
+
+            <h3>Adjustments</h3>
+
+            <div class="control">
+
+                <div class="control-label">
+                    <span>Brightness</span>
+                    <span id="brightnessControlValue">
+                        0
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    id="brightnessSlider"
+                    min="-100"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <div class="control-label">
+                    <span>Contrast</span>
+                    <span id="contrastControlValue">
+                        0
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    id="contrastSlider"
+                    min="-100"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <div class="control-label">
+                    <span>Saturation</span>
+                    <span id="saturationControlValue">
+                        0
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    id="saturationSlider"
+                    min="-100"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <div class="control-label">
+                    <span>Warmth</span>
+                    <span id="warmthControlValue">
+                        0
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    id="warmthSlider"
+                    min="-100"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="control">
+
+                <div class="control-label">
+                    <span>Sharpness</span>
+                    <span id="sharpnessControlValue">
+                        0
+                    </span>
+                </div>
+
+                <input
+                    type="range"
+                    id="sharpnessSlider"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- BEFORE AFTER -->
+
+        <section class="panel">
+
+            <h3>Compare</h3>
+
+            <button
+                id="beforeAfterBtn"
+                class="secondary-btn"
+            >
+                Show Original
+            </button>
+
+        </section>
+
+
+        <!-- DOWNLOAD -->
+
+        <button
+            id="downloadBtn"
+            class="download-btn"
+        >
+            💾 Download Photo
+        </button>
+
+    </section>
+
+</main>
+
+
+<footer>
+    GlowEdit © 2026
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
